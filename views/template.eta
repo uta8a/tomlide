@@ -15,7 +15,7 @@
     <link rel="icon" href="<%= it.meta.icon %>" type="image/svg+xml" />
 
     <style type="text/css">
-      body {
+body {
   font-family: 'Avenir Next', 'Hiragino Kaku Gothic ProN', 'Meiryo', 'メイリオ', sans-serif;
   font-weight: bold;
 }
@@ -37,6 +37,13 @@ code.remark-code {
   background-color: #272822;
   color: #f3f3f3;
   font-size: 23px;
+}
+
+img.sld-emoji-text {
+   height: 1em;
+   width: 1em;
+   margin: 0 .05em 0 .1em;
+   vertical-align: -0.1em;
 }
     </style>
   </head>

@@ -1,3 +1,9 @@
+import rawEmojiJsonData from "https://unpkg.com/emoji.json@13.1.0/emoji.json" assert {
+  type: "json",
+};
+import rawGitHubEmojiJsonData from "https://gist.githubusercontent.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb/raw/d8e4b78cfe66862cf3809443c1dba017f37b61db/emojis.json" assert {
+  type: "json",
+};
 const linkRegExp = /@\[link(?<name>.*?)\]\((?<link>.*?)\)/;
 const linkNameRegExp = /^:\s*([^]*?)/;
 
@@ -54,6 +60,53 @@ const imageFunction = (s: string): string => {
   throw new Error("Empty image match");
 };
 
+// {"codes":"1F600","char":"😀","name":"grinning face","category":"Smileys & Emotion (face-smiling)","group":"Smileys & Emotion","subgroup":"face-smiling"}
+type Emoji = {
+  codes: string;
+  char: string;
+  name: string;
+  category: string;
+  group: string;
+  subgroup: string;
+};
+// {"emoji": "👩‍👩‍👧‍👧", "name": "family: woman, woman, girl, girl", "shortname": ":woman_woman_girl_girl:", "unicode": "1F469 200D 1F469 200D 1F467 200D 1F467", "html": "&#128105;&zwj;&#128105;&zwj;&#128103;&zwj;&#128103;", "category": "People & Body (family)", "order": ""}
+type GHEmoji = {
+  emoji: string;
+  name: string;
+  shortname: string;
+  unicode: string;
+  html: string;
+  category: string;
+};
+const emojiJsonData = rawEmojiJsonData as Emoji[];
+const emojiGHJsonData = rawGitHubEmojiJsonData.emojis as GHEmoji[];
+const emojiRegExp = /@\[:(?<emoji>.*?):\]/;
+
+const convertEmoji = (s: string): string => {
+  const ghEmoji = emojiGHJsonData.find((emojiData) =>
+    emojiData.shortname === `:${s}:`
+  );
+  const emoji = emojiJsonData.find((emojiData) => emojiData.name === s);
+  if (ghEmoji === undefined) {
+    if (emoji === undefined) {
+      throw new Error(`:${s}: is not exists in emoji library.`);
+    }
+    return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/13.1.0/72x72/${emoji.codes.toLowerCase()}.png`;
+  }
+  return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/13.1.0/72x72/${ghEmoji.unicode.toLowerCase()}.png`;
+};
+
+const emojiFunction = (s: string): string => {
+  const mch = s.match(emojiRegExp);
+  if (mch?.groups) {
+    const gr = mch.groups;
+    const emoji = gr.emoji;
+    const link = convertEmoji(emoji);
+    return `<img src="${link}" class="sld-emoji-text"/>`;
+  }
+  throw new Error("Empty emoji match");
+};
+
 const replaceElement = (
   input: string,
   regex: RegExp,
@@ -88,9 +141,10 @@ const plugin = {
     const input = buffer[0];
     const linked = replaceElement(input, linkRegExp, linkFunction);
     const imaged = replaceElement(linked, imageRegExp, imageFunction);
+    const emojied = replaceElement(imaged, emojiRegExp, emojiFunction);
     buffer.shift();
-    buffer.push(imaged);
-    console.log("DEBUG:", imaged, buffer);
+    buffer.push(emojied);
+    // console.log("DEBUG:", emojied, buffer);
     return buffer;
   },
 };
