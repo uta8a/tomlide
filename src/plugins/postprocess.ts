@@ -82,6 +82,7 @@ const emojiJsonData = rawEmojiJsonData as Emoji[];
 const emojiGHJsonData = rawGitHubEmojiJsonData.emojis as GHEmoji[];
 const emojiRegExp = /@\[:(?<emoji>.*?):\]/;
 
+// use `assets/twemoji`, used emoji to `dist/`
 const convertEmoji = (s: string): string => {
   const ghEmoji = emojiGHJsonData.find((emojiData) =>
     emojiData.shortname === `:${s}:`
@@ -103,6 +104,19 @@ const emojiFunction = (s: string): string => {
     const emoji = gr.emoji;
     const link = convertEmoji(emoji);
     return `<img src="${link}" class="sld-emoji-text"/>`;
+  }
+  throw new Error("Empty emoji match");
+};
+
+const emRegExp = /@\[\*(?<em>.*?)\*\]/;
+
+const emFunction = (s: string): string => {
+  const mch = s.match(emRegExp);
+  if (mch?.groups) {
+    const gr = mch.groups;
+    const em = gr.em;
+    console.log("em", em);
+    return `<span class="sld-em">${em}</span>`;
   }
   throw new Error("Empty emoji match");
 };
@@ -142,8 +156,9 @@ const plugin = {
     const linked = replaceElement(input, linkRegExp, linkFunction);
     const imaged = replaceElement(linked, imageRegExp, imageFunction);
     const emojied = replaceElement(imaged, emojiRegExp, emojiFunction);
+    const emed = replaceElement(emojied, emRegExp, emFunction);
     buffer.shift();
-    buffer.push(emojied);
+    buffer.push(emed);
     // console.log("DEBUG:", emojied, buffer);
     return buffer;
   },
