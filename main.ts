@@ -5,11 +5,11 @@ import {
   defaultConfig,
   getConfig,
   parse,
+  render,
   renderFile,
-  render
 } from "https://deno.land/x/eta@v1.11.0/mod.ts";
 
-import {plugin} from "./src/plugins/postprocess.ts";
+import { plugin } from "./src/plugins/postprocess.ts";
 
 const decoder = new TextDecoder("utf-8");
 const tomlObject = parseToml(
@@ -68,7 +68,7 @@ const postConfig = getConfig({
 
 const renderTwice = await render(templateResult, {}, postConfig);
 
-console.log("twice: ", renderTwice)
+console.log("twice: ", renderTwice);
 
 // // there's no dist/, error
 // const write = Deno.writeTextFile(

@@ -90,7 +90,7 @@ const plugin = {
     const imaged = replaceElement(linked, imageRegExp, imageFunction);
     buffer.shift();
     buffer.push(imaged);
-    console.log('DEBUG:', imaged, buffer);
+    console.log("DEBUG:", imaged, buffer);
     return buffer;
   },
 };
