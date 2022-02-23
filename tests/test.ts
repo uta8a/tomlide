@@ -92,20 +92,20 @@ Deno.test("replace image #1", () => {
 Deno.test("replace image #2", () => {
   assertEquals(
     imageFunction("@[image](https://example.com/example.png)"),
-    `<img src="https://example.com/example.png" align="left" width="500"/>`,
+    `<img src="https://example.com/example.png" class="sld-left" width="500"/>`,
   );
 });
 
 Deno.test("replace image #3", () => {
   assertEquals(
     imageFunction("@[image: Example](https://example.com/example.png)"),
-    `<figure><img src="https://example.com/example.png" align="left" width="500" alt="Example"/><figcaption>Example</figcaption></figure>`,
+    `<figure><img src="https://example.com/example.png" class="sld-left" width="500" alt="Example"/><figcaption>Example</figcaption></figure>`,
   );
 });
 
 Deno.test("replace image #4", () => {
   assertEquals(
     imageFunction("@[image](./example.png)"),
-    `<img src="./example.png" align="left" width="500"/>`,
+    `<img src="./example.png" class="sld-left" width="500"/>`,
   );
 });

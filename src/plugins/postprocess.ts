@@ -38,15 +38,15 @@ const imageFunction = (s: string): string => {
     // convert image
     if (image === "") {
       // @[image](URL)
-      return `<img src="${encodeURI(link)}" align="left" width="500"/>`;
+      return `<img src="${encodeURI(link)}" class="sld-left" width="500"/>`;
     } else if (imageNameRegExp.test(image)) {
       // @[image: title](URL)
       // slice(1) skip `:`
       return `<figure><img src="${
         encodeURI(link)
-      }" align="left" width="500" alt="${image.slice(1).trim()}"/><figcaption>${
+      }" class="sld-left" width="500" alt="${
         image.slice(1).trim()
-      }</figcaption></figure>`;
+      }"/><figcaption>${image.slice(1).trim()}</figcaption></figure>`;
     } else {
       throw new Error("Valid Form: @[image](URL) or @[image: `title`](URL)");
     }
