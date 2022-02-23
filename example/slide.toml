@@ -1,0 +1,26 @@
+# This is sample slide
+
+[slide.title]
+title = "Sample Slide"
+text = """
+@kaito_tateyama
+"""
+
+[slide.page-1]
+title = "First Page"
+text = """
+Hello, this is sample page for tomlide.
+This is sample text.
+"""
+
+[slide.page-2]
+title = "Second Page"
+text = """
+Hello, this is sample page for tomlide.
+This is sample text.
+tomlide is simple toml-based slide generator.
+"""
+
+[slide.end]
+title = "Thank you!"
+text = "Any questions?"
