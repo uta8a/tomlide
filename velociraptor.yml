@@ -11,6 +11,8 @@ scripts:
   main:
     desc: Runs main script
     cmd: main.ts
+    allow:
+      read: example
 
   server:
     desc: Starts local server
