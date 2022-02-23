@@ -1,0 +1,10 @@
+<main>
+<% it.slide.forEach((content, index) => { %>
+  <div>
+    <h1><%= content.title %></h1>
+    <p><%= content.text %></p>
+    <span><%= `Page: ${index}` %></span>
+  </div>
+  <% console.log(index, content) %>
+<% }) %>
+</main>

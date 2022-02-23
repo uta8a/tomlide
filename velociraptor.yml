@@ -12,7 +12,9 @@ scripts:
     desc: Runs main script
     cmd: main.ts
     allow:
-      read: example
+      read: .
+      write: dist
+    unstable: true
 
   server:
     desc: Starts local server

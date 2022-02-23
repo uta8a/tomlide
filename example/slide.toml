@@ -1,19 +1,33 @@
 # This is sample slide
 
-[slide.title]
+# Site metadata (OGP, title, ...)
+[meta]
+title= "Sample Slide for tomlide"
+og_url = "https://example.com/"
+og_title = "Sample Slide for tomlide"
+og_image = "https://example.com/example.jpg"
+og_image_width = "600"
+og_image_height = "300"
+og_image_description = "Simple slide generator, description maybe include < or >"
+twitter_card = "summary_large_image"
+twitter_creator = "@kaito_tateyama"
+twitter_image = "https://example.com/example.jpg"
+icon = "https://example.com/example.jpg"
+
+[[slide]]
 title = "Sample Slide"
 text = """
 @kaito_tateyama
 """
 
-[slide.page-1]
+[[slide]]
 title = "First Page"
 text = """
 Hello, this is sample page for tomlide.
 This is sample text.
 """
 
-[slide.page-2]
+[[slide]]
 title = "Second Page"
 text = """
 Hello, this is sample page for tomlide.
@@ -21,16 +35,16 @@ This is sample text.
 tomlide is simple toml-based slide generator.
 """
 
-[slide.page-3]
+[[slide]]
 title = "Link Page"
 text = """
 Hello, this is link page for tomlide.
 This is simple usage @[link](https://github.com/uta8a/tomlide)
 link alias usage: @[link: Project repository](https://github.com/uta8a/tomlide)
-slide alias usage: @[link: slide 1](slide.page-1)
+slide alias usage: @[link: slide 1](@1)
 """
 
-[slide.page-4]
+[[slide]]
 title = "Image Page"
 text = """
 Hello, this is image page for tomlide.
@@ -39,7 +53,7 @@ Hello, this is image page for tomlide.
 @[image: alt and description](relative | web path)
 """
 
-[slide.page-5]
+[[slide]]
 title = "Emoji Page"
 text = """
 Hello, this is emoji page for tomlide.
@@ -47,6 +61,13 @@ Hello, this is emoji page for tomlide.
 @[:tada:]
 """
 
-[slide.end]
+[[slide]]
+title = "Bold Page"
+text = """
+Hello, this is Bold page for tomlide.
+@[*THIS IS BOLD STYLE*]
+"""
+
+[[slide]]
 title = "Thank you!"
 text = "Any questions?"
