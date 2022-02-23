@@ -21,6 +21,32 @@ This is sample text.
 tomlide is simple toml-based slide generator.
 """
 
+[slide.page-3]
+title = "Link Page"
+text = """
+Hello, this is link page for tomlide.
+This is simple usage @[link](https://github.com/uta8a/tomlide)
+link alias usage: @[link: Project repository](https://github.com/uta8a/tomlide)
+slide alias usage: @[link: slide 1](slide.page-1)
+"""
+
+[slide.page-4]
+title = "Image Page"
+text = """
+Hello, this is image page for tomlide.
+@[image](relative path)
+@[image](web path)
+@[image: alt and description](relative | web path)
+"""
+
+[slide.page-5]
+title = "Emoji Page"
+text = """
+Hello, this is emoji page for tomlide.
+@[:sob:]
+@[:tada:]
+"""
+
 [slide.end]
 title = "Thank you!"
 text = "Any questions?"
