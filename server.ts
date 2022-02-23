@@ -7,7 +7,7 @@ async function handleRequest(request: Request): Promise<Response> {
   // 1. A request comes in for a specific asset.
   // 2. We read the asset from the file system.
   // 3. We send the asset back to the client.
-  console.log(pathname)
+  console.log(pathname);
   // Check if the request is for style.css.
   // if (pathname.startsWith("/style.css")) {
   //   // Read the style.css file from the file system.
@@ -21,7 +21,7 @@ async function handleRequest(request: Request): Promise<Response> {
   // }
 
   return new Response(
-    await Deno.readFileSync('dist/index.html')
+    await Deno.readFileSync("dist/index.html"),
   );
 }
 
