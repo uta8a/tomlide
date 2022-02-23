@@ -57,7 +57,7 @@ const imageFunction = (s: string): string => {
 const replaceElement = (
   input: string,
   regex: RegExp,
-  f: Function,
+  f: (arg: string) => string,
 ): string => {
   const res = [];
   const mch = input.match(regex);

@@ -1,10 +1,6 @@
 import { parse as parseToml } from "https://deno.land/std@0.126.0/encoding/toml.ts";
 import {
-  compile,
-  configure,
-  defaultConfig,
   getConfig,
-  parse,
   render,
   renderFile,
 } from "https://deno.land/x/eta@v1.11.0/mod.ts";
@@ -70,10 +66,10 @@ const renderTwice = await render(templateResult, {}, postConfig);
 
 console.log("twice: ", renderTwice);
 
-// // there's no dist/, error
-// const write = Deno.writeTextFile(
-//   `${Deno.cwd()}/dist/index.html`,
-//   templateResult,
-// );
+// there's no dist/, error
+const write = Deno.writeTextFile(
+  `${Deno.cwd()}/dist/index.html`,
+  renderTwice as string,
+);
 
-// write.then(() => console.log("File written"));
+write.then(() => console.log("File written"));
