@@ -35,18 +35,12 @@ type RawSlideToml = {
 
 const rawToml = tomlObject as RawSlideToml;
 
-const viewPath = `${Deno.cwd()}/src/views/`;
+const viewPath = `${Deno.cwd()}/views/`;
 
 const config = getConfig({
   views: viewPath,
   replaceData: rawToml,
 });
-// const rawFile = await Deno.readFileSync("./src/views/template.eta");
-// const rawText = decoder.decode(rawFile);
-// const parsed = parse(rawText, config);
-// console.log(parsed);
-// const compiled = compile(rawText, config)(rawToml, config);
-// console.log(compiled);
 
 const templateResult = await renderFile("./template.eta", rawToml, config);
 const postConfig = getConfig({
