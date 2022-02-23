@@ -1,6 +1,6 @@
-# slideno
+# tomlide
 
-Convert mdx to web slide
+Generate web slide from toml file
 
 ```shell
 # setup git-hook
