@@ -1,7 +1,18 @@
-import { parse } from "https://deno.land/std@0.126.0/encoding/toml.ts";
+import { parse as parseToml } from "https://deno.land/std@0.126.0/encoding/toml.ts";
+import {
+  compile,
+  configure,
+  defaultConfig,
+  getConfig,
+  parse,
+  renderFile,
+  render
+} from "https://deno.land/x/eta@v1.11.0/mod.ts";
+
+import {plugin} from "./src/plugins/postprocess.ts";
 
 const decoder = new TextDecoder("utf-8");
-const tomlObject = parse(
+const tomlObject = parseToml(
   decoder.decode(Deno.readFileSync("./example/slide.toml")),
 );
 
@@ -28,24 +39,41 @@ type RawSlideToml = {
 
 const rawToml = tomlObject as RawSlideToml;
 
-import { configure, renderFile } from "https://deno.land/x/eta@v1.11.0/mod.ts";
-
 const viewPath = `${Deno.cwd()}/src/views/`;
 
-configure({
-  // add plugin here
-  // In the /views directory
+const config = getConfig({
   views: viewPath,
+  replaceData: rawToml,
 });
+// const rawFile = await Deno.readFileSync("./src/views/template.eta");
+// const rawText = decoder.decode(rawFile);
+// const parsed = parse(rawText, config);
+// console.log(parsed);
+// const compiled = compile(rawText, config)(rawToml, config);
+// console.log(compiled);
 
-const templateResult = await renderFile("./template.eta", rawToml);
+const templateResult = await renderFile("./template.eta", rawToml, config);
+const postConfig = getConfig({
+  plugins: [plugin],
+  views: viewPath,
+  replaceData: rawToml,
+});
+// console.log(templateResult);
+// // console.log(pluginLink);
 
-console.log(templateResult);
+// configure({
+//   // add plugin here
+//   plugins: [pluginLink],
+// });
 
-// there's no dist/, error
-const write = Deno.writeTextFile(
-  `${Deno.cwd()}/dist/index.html`,
-  templateResult,
-);
+const renderTwice = await render(templateResult, {}, postConfig);
 
-write.then(() => console.log("File written"));
+console.log("twice: ", renderTwice)
+
+// // there's no dist/, error
+// const write = Deno.writeTextFile(
+//   `${Deno.cwd()}/dist/index.html`,
+//   templateResult,
+// );
+
+// write.then(() => console.log("File written"));
