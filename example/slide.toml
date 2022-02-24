@@ -5,14 +5,18 @@
 title= "Sample Slide for tomlide"
 og_url = "https://example.com/"
 og_title = "Sample Slide for tomlide"
-og_image = "https://example.com/example.jpg"
+og_image = "https://example.com/example.v1.png"
 og_image_width = "600"
 og_image_height = "300"
 og_image_description = "Simple slide generator, description maybe include < or >"
+# twitter_card: summary | summary_large_image
 twitter_card = "summary_large_image"
+# twitter_creator: @<username>
 twitter_creator = "@kaito_tateyama"
-twitter_image = "https://example.com/example.jpg"
-icon = "https://example.com/example.jpg"
+# twitter_image: cache by Twitter, change url when change twitter image.
+twitter_image = "https://example.com/example.v1.png"
+# icon: .png | .ico
+icon = "https://example.com/example.png"
 
 [[slide]]
 title = "Sample Slide"

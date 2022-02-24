@@ -12,9 +12,9 @@
     <meta name="twitter:card" content="<%= it.meta.twitter_card %>"/>
     <meta name="twitter:creator" content="<%= it.meta.twitter_creator %>"/>
     <meta name="twitter:image" content="<%= it.meta.twitter_image %>"/>
-    <link rel="icon" href="<%= it.meta.icon %>" type="image/svg+xml" />
+    <link rel="icon" href="<%= it.meta.icon %>" />
 
-    <style type="text/css">
+    <style>
 body {
   font-family: 'Avenir Next', 'Hiragino Kaku Gothic ProN', 'Meiryo', 'メイリオ', sans-serif;
 }
