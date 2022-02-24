@@ -4,6 +4,7 @@ import rawEmojiJsonData from "https://unpkg.com/emoji.json@13.1.0/emoji.json" as
 import rawGitHubEmojiJsonData from "https://gist.githubusercontent.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb/raw/d8e4b78cfe66862cf3809443c1dba017f37b61db/emojis.json" assert {
   type: "json",
 };
+
 const linkRegExp = /@\[link(?<name>.*?)\]\((?<link>.*?)\)/;
 const linkNameRegExp = /^:\s*([^]*?)/;
 
@@ -92,21 +93,29 @@ const convertEmoji = (s: string): string => {
     if (emoji === undefined) {
       throw new Error(`:${s}: is not exists in emoji library.`);
     }
-    return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/13.1.0/72x72/${emoji.codes.toLowerCase()}.png`;
+    const code = emoji.codes.toLowerCase();
+    return `./${code}.svg`;
   }
-  return `https://cdnjs.cloudflare.com/ajax/libs/twemoji/13.1.0/72x72/${ghEmoji.unicode.toLowerCase()}.png`;
+  const code = ghEmoji.unicode.toLowerCase();
+  return `./${code}.svg`;
 };
 
-const emojiFunction = (s: string): string => {
-  const mch = s.match(emojiRegExp);
-  if (mch?.groups) {
-    const gr = mch.groups;
-    const emoji = gr.emoji;
-    const link = convertEmoji(emoji);
-    return `<img src="${link}" class="sld-emoji-text"/>`;
-  }
-  throw new Error("Empty emoji match");
-};
+const emojiFunction = (config: Record<string, Array<string>>) =>
+  (s: string): string => {
+    const mch = s.match(emojiRegExp);
+    if (mch?.groups) {
+      const gr = mch.groups;
+      const emoji = gr.emoji;
+      const link = convertEmoji(emoji);
+      if (config.emojis === undefined) {
+        config.emojis = [link];
+      } else {
+        config.emojis.push(link);
+      }
+      return `<img src="${link}" class="sld-emoji-text"/>`;
+    }
+    throw new Error("Empty emoji match");
+  };
 
 const emRegExp = /@\[\*(?<em>.*?)\*\]/;
 
@@ -115,7 +124,6 @@ const emFunction = (s: string): string => {
   if (mch?.groups) {
     const gr = mch.groups;
     const em = gr.em;
-    console.log("em", em);
     return `<span class="sld-em">${em}</span>`;
   }
   throw new Error("Empty emoji match");
@@ -151,15 +159,17 @@ const replaceElement = (
 };
 
 const plugin = {
-  processAST: function (buffer: string[], _config: Record<string, string>) {
+  processAST: function (
+    buffer: string[],
+    config: Record<string, Array<string>>,
+  ) {
     const input = buffer[0];
     const linked = replaceElement(input, linkRegExp, linkFunction);
     const imaged = replaceElement(linked, imageRegExp, imageFunction);
-    const emojied = replaceElement(imaged, emojiRegExp, emojiFunction);
+    const emojied = replaceElement(imaged, emojiRegExp, emojiFunction(config));
     const emed = replaceElement(emojied, emRegExp, emFunction);
     buffer.shift();
     buffer.push(emed);
-    // console.log("DEBUG:", emojied, buffer);
     return buffer;
   },
 };

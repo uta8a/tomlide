@@ -4,9 +4,9 @@ import {
   render,
   renderFile,
 } from "https://deno.land/x/eta@v1.11.0/mod.ts";
-import { walk } from "https://deno.land/std/fs/walk.ts";
+import { walk } from "https://deno.land/std@0.126.0/fs/walk.ts";
 import { plugin } from "./src/plugins/postprocess.ts";
-import { extname } from "https://deno.land/std@0.126.0/path/mod.ts";
+import { basename, extname } from "https://deno.land/std@0.126.0/path/mod.ts";
 
 const decoder = new TextDecoder("utf-8");
 const tomlObject = parseToml(
@@ -48,18 +48,12 @@ const postConfig = getConfig({
   plugins: [plugin],
   views: viewPath,
   replaceData: rawToml,
+  emojis: [],
 });
-// console.log(templateResult);
-// // console.log(pluginLink);
-
-// configure({
-//   // add plugin here
-//   plugins: [pluginLink],
-// });
 
 const renderTwice = await render(templateResult, {}, postConfig);
 
-console.log("twice: ", renderTwice);
+console.log("DEBUG: ", renderTwice);
 
 // there's no dist/, error
 const write = Deno.writeTextFile(
@@ -67,7 +61,7 @@ const write = Deno.writeTextFile(
   renderTwice as string,
 );
 
-write.then(() => console.log("File written"));
+write.then(() => console.log("File written to dist/"));
 
 // copy assets
 const files = walk("example");
@@ -76,8 +70,22 @@ for await (const file of files) {
     file.isFile && /[png|jpg|ico|svg|PNG|JPG|ICO|SVG]$/.test(extname(file.path))
   ) {
     const dest = file.path.slice(8); // skip 'example/'
-    console.log(dest);
     await Deno.copyFileSync(file.path, `dist/${dest}`);
     console.log(`Copy to dist/: ${file.path}`);
   }
+}
+
+const getEmoji = async (code: string) => {
+  const files = walk("assets/twemoji");
+  for await (const file of files) {
+    if (basename(file.path).startsWith(code)) {
+      const dest = basename(file.path);
+      await Deno.copyFileSync(file.path, `dist/${dest}`);
+      return;
+    }
+  }
+  throw new Error("cannot get emoji from assets/");
+};
+for (const emojiPath of postConfig.emojis) {
+  await getEmoji(emojiPath.slice(2, -4));
 }
