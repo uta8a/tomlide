@@ -4,15 +4,19 @@ import {
 } from "https://deno.land/std@0.126.0/testing/asserts.ts";
 
 import {
+  compile,
   getConfig,
   render,
   renderFile,
+  templates,
 } from "https://deno.land/x/eta@v1.11.0/mod.ts";
 
 import { parse as parseToml } from "https://deno.land/std@0.126.0/encoding/toml.ts";
 import { walk } from "https://deno.land/std@0.126.0/fs/walk.ts";
 import { plugin } from "./src/plugins/postprocess.ts";
 import { basename, extname } from "https://deno.land/std@0.126.0/path/mod.ts";
+import { download } from "https://deno.land/x/download@v1.0.1/mod.ts";
+import { ensureDirSync } from "https://deno.land/std@0.126.0/fs/mod.ts";
 
 import rawEmojiJsonData from "https://unpkg.com/emoji.json@13.1.0/emoji.json" assert {
   type: "json",
@@ -48,13 +52,17 @@ export {
   assertEquals,
   assertThrows,
   basename,
+  compile,
+  download,
   emojiGHJsonData,
   emojiJsonData,
+  ensureDirSync,
   extname,
   getConfig,
   parseToml,
   plugin,
   render,
   renderFile,
+  templates,
   walk,
 };

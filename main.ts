@@ -75,7 +75,7 @@ for await (const file of files) {
     console.log(`Copy to dist/: ${file.path}`);
   }
 }
-
+// https://raw.githubusercontent.com/uta8a/tomlide/main/assets/twemoji/1f004.svg
 const getEmoji = async (code: string) => {
   const files = walk("assets/twemoji");
   for await (const file of files) {
