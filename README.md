@@ -2,7 +2,7 @@
 
 Generate simple web slide from toml file (using deno)
 
-![tomlide logo v1](./example/tomlide.v1.png)
+[![tomlide logo v1](./example/tomlide.v1.png)](https://uta8a.github.io/tomlide.example/#1)
 
 ## feature
 
