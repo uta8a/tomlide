@@ -29,6 +29,20 @@ alias by "GitHub" and "CLDR Short Name" are available
 @[*BOLD TEXT*] -> BOLD TEXT (font-weight: bold;)
 ```
 
+## usage
+
+### Generate `dist/`
+
+```none
+deno run --allow-read --allow-net --allow-write --unstable https://raw.githubusercontent.com/uta8a/tomlide/main/cli.ts
+```
+
+### Serve `dist/` (devserver)
+
+```none
+deno run --allow-read --allow-net --allow-write --unstable https://raw.githubusercontent.com/uta8a/tomlide/main/cli.ts
+```
+
 ## development
 
 ```shell
