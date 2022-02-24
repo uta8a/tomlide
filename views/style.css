@@ -2,12 +2,16 @@
   --font-size: 15px;
   font-size: var(--font-size);
 }
-html, body {
-  font-family: 'Avenir Next', 'Hiragino Kaku Gothic ProN', 'Meiryo', 'メイリオ', sans-serif;
+html,
+body {
+  font-family: "Avenir Next", "Hiragino Kaku Gothic ProN", "Meiryo", "メイリオ",
+    sans-serif;
   margin: 0;
   padding: 0;
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: bold;
 }
 main {
@@ -15,6 +19,7 @@ main {
   border: 5px black solid;
   box-sizing: border-box;
   background-color: white;
+  overflow: hidden;
 }
 main h1 {
   padding-left: 3rem;
@@ -35,14 +40,33 @@ main .page-number {
   font-weight: bold;
   font-size: 1.8rem;
 }
+main img {
+  height: 20rem;
+}
 main img.sld-emoji-text {
-   height: 1em;
-   width: 1em;
-   margin: 0 .05em 0 .1em;
-   vertical-align: -0.1em;
+  height: 1em;
+  width: 1em;
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
 }
 main .sld-em {
   font-weight: bold;
+}
+main a {
+  text-decoration: underline;
+  font-weight: bold;
+  color: rgb(151, 184, 255);
+}
+
+main a:visited {
+  color: rgb(0, 81, 255);
+}
+main figcaption {
+  padding-left: 1rem;
+  font-size: 1.5rem;
+}
+main a:hover {
+  color: rgb(62, 0, 134);
 }
 
 main #slide-1 * {

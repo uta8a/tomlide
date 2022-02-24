@@ -23,7 +23,9 @@ scripts:
       read: .
       write: dist
     unstable: true
-    watch: views
+    watch:
+      - views
+      - example
 
   server:
     desc: Starts local server

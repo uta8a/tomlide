@@ -40,13 +40,11 @@ const imageFunction = (s: string): string => {
     // convert image
     if (image === "") {
       // @[image](URL)
-      return `<img src="${encodeURI(link)}" class="sld-left" width="500"/>`;
+      return `<img src="${encodeURI(link)}" class="sld-left"/>`;
     } else if (imageNameRegExp.test(image)) {
       // @[image: title](URL)
       // slice(1) skip `:`
-      return `<figure><img src="${
-        encodeURI(link)
-      }" class="sld-left" width="500" alt="${
+      return `<figure><img src="${encodeURI(link)}" class="sld-left" alt="${
         image.slice(1).trim()
       }"/><figcaption>${image.slice(1).trim()}</figcaption></figure>`;
     } else {

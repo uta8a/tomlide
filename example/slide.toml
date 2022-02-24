@@ -16,12 +16,12 @@ twitter_creator = "@kaito_tateyama"
 # twitter_image: cache by Twitter, change url when change twitter image.
 twitter_image = "https://example.com/example.v1.png"
 # icon: .png | .ico
-icon = "https://example.com/example.png"
+icon = "https://example.com/example.icon.png"
 
 [[slide]]
-title = "Sample Slide"
+title = "Sample Slide for tomlide"
 text = """
-@kaito_tateyama
+Twitter: @kaito_tateyama
 """
 
 [[slide]]
@@ -29,13 +29,12 @@ title = "First Page"
 text = """
 Hello, this is sample page for tomlide.
 This is sample text. <div>hello</div>
+こんにちは。これはサンプルスライドです。
 """
 
 [[slide]]
-title = "Second Page"
+title = "Second Page - 2枚目"
 text = """
-Hello, this is sample page for tomlide.
-This is sample text.
 tomlide is simple toml-based slide generator.
 """
 
@@ -50,9 +49,9 @@ slide alias usage: @[link: slide 1](@1)
 """
 
 [[slide]]
-title = "Image Page"
+title = "Image Page #1"
 text = """
-Hello, this is image page for tomlide.
+Overflow when there are many images.
 @[image](./tomlide.v1.png)
 @[image](https://avatars.githubusercontent.com/u/31395466?v=4)
 @[image: alt and description](https://avatars.githubusercontent.com/u/31395466?v=4)
@@ -60,11 +59,25 @@ Hello, this is image page for tomlide.
 """
 
 [[slide]]
+title = "Image Page #2"
+text = """
+Image page
+@[image](https://avatars.githubusercontent.com/u/31395466?v=4)
+"""
+
+[[slide]]
+title = "Image Page #3"
+text = """
+Image inside link (Click image!)
+@[link: @[image: image inside link](https://github.com/uta8a/tomlide)](./tomlide.v1.png)
+"""
+
+[[slide]]
 title = "Emoji Page"
 text = """
 Hello, this is emoji page for tomlide.
-@[:sob:]
-@[:tada:]
+I am cry. @[:sob:]
+I am happy! @[:tada:]
 """
 
 [[slide]]
@@ -76,4 +89,7 @@ Hello, this is Bold page for tomlide.
 
 [[slide]]
 title = "Thank you!"
-text = "Any questions?"
+text = """
+Do you have any questions?
+Feel free to open a @[link: issue](https://github.com/uta8a/tomlide/issues)
+"""
