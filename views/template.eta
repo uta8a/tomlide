@@ -15,62 +15,13 @@
     <link rel="icon" href="<%= it.meta.icon %>" />
 
     <style>
-body {
-  font-family: 'Avenir Next', 'Hiragino Kaku Gothic ProN', 'Meiryo', 'メイリオ', sans-serif;
-}
-h1, h2, h3 {
-  font-weight: bold;
-}
-.remark-code,
-.remark-inline-code {
-  font-family: 'Menlo', 'Monaco', 'Courier new', monospace;
-  background-color: #eeeeee;
-  padding: 4px 16px;
-  border-radius: 8px;
-}
-
-code.remark-code {
-  display: block;
-  padding: 0.7em;
-  border-radius: 5px;
-  background-color: #272822;
-  color: #f3f3f3;
-  font-size: 23px;
-}
-
-img.sld-emoji-text {
-   height: 1em;
-   width: 1em;
-   margin: 0 .05em 0 .1em;
-   vertical-align: -0.1em;
-}
-.sld-em {
-  font-weight: bold;
-}
+<%~ includeFile('./style.css') %>
     </style>
   </head>
 <body>
 <%~ includeFile('./body.eta', {slide: it.slide}) %>
 <script>
-  const router = (path) => {
-    console.log(path);
-    if (path === "") {
-      path = "#1";
-    }
-    const main = document.querySelector('#main');
-    const template = document.querySelector(`#template-${path.replace('#', '')}`);
-    if (template !== null) {
-      return template.innerHTML;
-    }else{
-      return `<h1>404</h1><p><a href='/'>Top page</a></p>`;
-    }
-  }
-  const render = path => {
-    document.querySelector("#main")
-      .innerHTML = router(path);
-  };
-  window.onhashchange = evt => render(window.location.hash);
-  render(window.location.hash);
+<%~ includeFile('./main.js') %>
 </script>
 </body>
 </html>
