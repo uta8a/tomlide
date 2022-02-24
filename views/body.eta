@@ -1,10 +1,11 @@
 <main>
 <div id="main"></div>
 <% it.slide.forEach((content, index) => { %>
-  <template id="template-<%= index %>">
+  <template id="template-<%= index + 1 %>">
     <h1><%= content.title %></h1>
-    <p><%= content.text %></p>
-    <span><%= `Page: ${index}` %></span>
+    <% /* E.e is escape function, escape XML */ %>
+    <%~ content.text.split('\n').map(text => {return `<p>${E.e(text)}</p>`}).join('\n') %>
+    <span><%= `Page: ${index + 1}` %></span>
   </template>
   <% /* <% console.log(index, content) %> */ %>
 <% }) %>

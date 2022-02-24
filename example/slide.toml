@@ -28,7 +28,7 @@ text = """
 title = "First Page"
 text = """
 Hello, this is sample page for tomlide.
-This is sample text. <>::<><><>::<!!
+This is sample text. <div>hello</div>
 """
 
 [[slide]]
