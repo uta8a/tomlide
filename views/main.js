@@ -1,6 +1,7 @@
+// deno-lint-ignore-file no-window-prefix
+
 /* Simple hash router */
 const router = (path) => {
-  console.log(path);
   if (path === "") {
     path = "#1";
   }
@@ -17,13 +18,30 @@ const render = (path) => {
       .innerHTML = router(path);
   } catch {
     document.querySelector("#main")
-      .innerHTML = router("-1");
+      .innerHTML = router("-1"); // 404
   }
 };
 window.addEventListener("hashchange", function () {
   render(window.location.hash);
 });
 window.addEventListener("DOMContentLoaded", function (_ev) {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  if (16 * height > 9 * width) {
+    document.querySelector("main").style.width = `${width * 0.8}px`;
+    document.querySelector("main").style.left = `${width * 0.1}px`;
+    document.querySelector("main").style.height = `${width * 0.8 * 9 / 16}px`;
+    document.querySelector("main").style.top = `${
+      height / 2 - width * 0.8 * 9 / 16 / 2
+    }px`;
+  } else {
+    document.querySelector("main").style.height = `${height * 0.8}px`;
+    document.querySelector("main").style.top = `${height * 0.1}px`;
+    document.querySelector("main").style.width = `${height * 0.8 * 16 / 9}px`;
+    document.querySelector("main").style.left = `${
+      width / 2 - height * 0.8 * 16 / 9 / 2
+    }px`;
+  }
   render(window.location.hash);
 });
 
@@ -64,12 +82,34 @@ document.addEventListener("keydown", function logKey(e) {
 });
 
 document.addEventListener("click", function (e) {
-  const width = window.outerWidth;
+  const width = window.innerWidth;
   const x = e.pageX;
-  if (x < width / 3) {
+  if (x < width / 10) {
     window.location.hash = left(window.location.hash);
   }
-  if (x > width * 2 / 3) {
+  if (x > width * 9 / 10) {
     window.location.hash = right(window.location.hash);
   }
 });
+
+/* resize slide */
+function resize(_e) {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  if (16 * height > 9 * width) {
+    document.querySelector("main").style.width = `${width * 0.8}px`;
+    document.querySelector("main").style.left = `${width * 0.1}px`;
+    document.querySelector("main").style.height = `${width * 0.8 * 9 / 16}px`;
+    document.querySelector("main").style.top = `${
+      height / 2 - width * 0.8 * 9 / 16 / 2
+    }px`;
+  } else {
+    document.querySelector("main").style.height = `${height * 0.8}px`;
+    document.querySelector("main").style.top = `${height * 0.1}px`;
+    document.querySelector("main").style.width = `${height * 0.8 * 16 / 9}px`;
+    document.querySelector("main").style.left = `${
+      width / 2 - height * 0.8 * 16 / 9 / 2
+    }px`;
+  }
+}
+window.onresize = resize;

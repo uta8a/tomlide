@@ -1,26 +1,17 @@
-body {
+html, body {
   font-family: 'Avenir Next', 'Hiragino Kaku Gothic ProN', 'Meiryo', 'メイリオ', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 h1, h2, h3 {
   font-weight: bold;
 }
-.remark-code,
-.remark-inline-code {
-  font-family: 'Menlo', 'Monaco', 'Courier new', monospace;
-  background-color: #eeeeee;
-  padding: 4px 16px;
-  border-radius: 8px;
+main {
+  position: relative;
+  border: 5px black solid;
+  box-sizing: border-box;
+  background-color: aliceblue;
 }
-
-code.remark-code {
-  display: block;
-  padding: 0.7em;
-  border-radius: 5px;
-  background-color: #272822;
-  color: #f3f3f3;
-  font-size: 23px;
-}
-
 img.sld-emoji-text {
    height: 1em;
    width: 1em;
@@ -29,4 +20,14 @@ img.sld-emoji-text {
 }
 .sld-em {
   font-weight: bold;
+}
+
+#background {
+  top: 0;
+  display: inline;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(211, 255, 237);
+  z-index: -1;
 }

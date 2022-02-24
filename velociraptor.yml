@@ -16,10 +16,19 @@ scripts:
       write: dist
     unstable: true
 
+  watch:
+    desc: watch main script
+    cmd: main.ts
+    allow:
+      read: .
+      write: dist
+    unstable: true
+    watch: views
+
   server:
     desc: Starts local server
     cmd: server.ts
-    watch: true
+    watch: dist
     allow:
       - read
       - net
