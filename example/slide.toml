@@ -55,6 +55,7 @@ Hello, this is image page for tomlide.
 @[image](./tomlide.v1.png)
 @[image](https://avatars.githubusercontent.com/u/31395466?v=4)
 @[image: alt and description](https://avatars.githubusercontent.com/u/31395466?v=4)
+@[link: @[image: image inside link](https://github.com/uta8a/tomlide)](./tomlide.v1.png)
 """
 
 [[slide]]
