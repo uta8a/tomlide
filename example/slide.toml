@@ -52,9 +52,9 @@ slide alias usage: @[link: slide 1](@1)
 title = "Image Page"
 text = """
 Hello, this is image page for tomlide.
-@[image](relative path)
-@[image](web path)
-@[image: alt and description](relative | web path)
+@[image](./tomlide.v1.png)
+@[image](https://avatars.githubusercontent.com/u/31395466?v=4)
+@[image: alt and description](https://avatars.githubusercontent.com/u/31395466?v=4)
 """
 
 [[slide]]

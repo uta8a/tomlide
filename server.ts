@@ -19,9 +19,13 @@ async function handleRequest(request: Request): Promise<Response> {
   //     },
   //   });
   // }
-
+  if (pathname === "/") {
+    return new Response(
+      await Deno.readFileSync("dist/index.html"),
+    );
+  }
   return new Response(
-    await Deno.readFileSync("dist/index.html"),
+    await Deno.readFileSync(`dist/${pathname}`),
   );
 }
 

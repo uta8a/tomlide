@@ -2,6 +2,8 @@
 
 Generate web slide from toml file
 
+![tomlide logo v1](./example/tomlide.v1.png)
+
 ```shell
 # setup git-hook
 vr

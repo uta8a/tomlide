@@ -4,8 +4,9 @@ import {
   render,
   renderFile,
 } from "https://deno.land/x/eta@v1.11.0/mod.ts";
-
+import { walk } from "https://deno.land/std/fs/walk.ts";
 import { plugin } from "./src/plugins/postprocess.ts";
+import { extname } from "https://deno.land/std@0.126.0/path/mod.ts";
 
 const decoder = new TextDecoder("utf-8");
 const tomlObject = parseToml(
@@ -67,3 +68,16 @@ const write = Deno.writeTextFile(
 );
 
 write.then(() => console.log("File written"));
+
+// copy assets
+const files = walk("example");
+for await (const file of files) {
+  if (
+    file.isFile && /[png|jpg|ico|svg|PNG|JPG|ICO|SVG]$/.test(extname(file.path))
+  ) {
+    const dest = file.path.slice(8); // skip 'example/'
+    console.log(dest);
+    await Deno.copyFileSync(file.path, `dist/${dest}`);
+    console.log(`Copy to dist/: ${file.path}`);
+  }
+}
