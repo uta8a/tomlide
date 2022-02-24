@@ -19,7 +19,7 @@
     </style>
   </head>
 <body>
-<%~ includeFile('./body.eta', {slide: it.slide}) %>
+<%~ includeFile('./body.eta', {slide: it.slide, title: it.meta.title}) %>
 <div id="background"></div>
 <script>
 <%~ includeFile('./main.js') %>

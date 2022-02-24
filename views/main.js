@@ -1,5 +1,29 @@
 // deno-lint-ignore-file no-window-prefix
 
+const resizeWindow = () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  document.querySelector("html").style.setProperty(
+    "--font-size",
+    `${1.1 * width / 100}px`,
+  );
+  if (16 * height > 9 * width) {
+    document.querySelector("main").style.width = `${width * 0.8}px`;
+    document.querySelector("main").style.left = `${width * 0.1}px`;
+    document.querySelector("main").style.height = `${width * 0.8 * 9 / 16}px`;
+    document.querySelector("main").style.top = `${
+      height / 2 - width * 0.8 * 9 / 16 / 2
+    }px`;
+  } else {
+    document.querySelector("main").style.height = `${height * 0.8}px`;
+    document.querySelector("main").style.top = `${height * 0.1}px`;
+    document.querySelector("main").style.width = `${height * 0.8 * 16 / 9}px`;
+    document.querySelector("main").style.left = `${
+      width / 2 - height * 0.8 * 16 / 9 / 2
+    }px`;
+  }
+};
+
 /* Simple hash router */
 const router = (path) => {
   if (path === "") {
@@ -25,23 +49,7 @@ window.addEventListener("hashchange", function () {
   render(window.location.hash);
 });
 window.addEventListener("DOMContentLoaded", function (_ev) {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  if (16 * height > 9 * width) {
-    document.querySelector("main").style.width = `${width * 0.8}px`;
-    document.querySelector("main").style.left = `${width * 0.1}px`;
-    document.querySelector("main").style.height = `${width * 0.8 * 9 / 16}px`;
-    document.querySelector("main").style.top = `${
-      height / 2 - width * 0.8 * 9 / 16 / 2
-    }px`;
-  } else {
-    document.querySelector("main").style.height = `${height * 0.8}px`;
-    document.querySelector("main").style.top = `${height * 0.1}px`;
-    document.querySelector("main").style.width = `${height * 0.8 * 16 / 9}px`;
-    document.querySelector("main").style.left = `${
-      width / 2 - height * 0.8 * 16 / 9 / 2
-    }px`;
-  }
+  resizeWindow();
   render(window.location.hash);
 });
 
@@ -94,22 +102,6 @@ document.addEventListener("click", function (e) {
 
 /* resize slide */
 function resize(_e) {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  if (16 * height > 9 * width) {
-    document.querySelector("main").style.width = `${width * 0.8}px`;
-    document.querySelector("main").style.left = `${width * 0.1}px`;
-    document.querySelector("main").style.height = `${width * 0.8 * 9 / 16}px`;
-    document.querySelector("main").style.top = `${
-      height / 2 - width * 0.8 * 9 / 16 / 2
-    }px`;
-  } else {
-    document.querySelector("main").style.height = `${height * 0.8}px`;
-    document.querySelector("main").style.top = `${height * 0.1}px`;
-    document.querySelector("main").style.width = `${height * 0.8 * 16 / 9}px`;
-    document.querySelector("main").style.left = `${
-      width / 2 - height * 0.8 * 16 / 9 / 2
-    }px`;
-  }
+  resizeWindow();
 }
 window.onresize = resize;
