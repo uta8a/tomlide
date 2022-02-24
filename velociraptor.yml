@@ -51,6 +51,7 @@ scripts:
   test:
     desc: Runs the tests
     cmd: deno test --reload
+    unstable: true
     gitHook: pre-push
 
   cov:

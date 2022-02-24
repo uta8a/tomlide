@@ -1,12 +1,13 @@
-import { parse as parseToml } from "https://deno.land/std@0.126.0/encoding/toml.ts";
 import {
+  basename,
+  extname,
   getConfig,
+  parseToml,
+  plugin,
   render,
   renderFile,
-} from "https://deno.land/x/eta@v1.11.0/mod.ts";
-import { walk } from "https://deno.land/std@0.126.0/fs/walk.ts";
-import { plugin } from "./src/plugins/postprocess.ts";
-import { basename, extname } from "https://deno.land/std@0.126.0/path/mod.ts";
+  walk,
+} from "./deps.ts";
 
 const decoder = new TextDecoder("utf-8");
 const tomlObject = parseToml(

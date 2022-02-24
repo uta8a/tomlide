@@ -1,13 +1,13 @@
+import { assertEquals, assertThrows } from "../deps.ts";
+
 import {
+  emFunction,
+  emojiFunction,
   imageFunction,
   linkFunction,
   replaceElement,
 } from "../src/plugins/postprocess.ts";
 
-import {
-  assertEquals,
-  assertThrows,
-} from "https://deno.land/std@0.126.0/testing/asserts.ts";
 // Compact form: name and function
 Deno.test("replaceElement #1", () => {
   assertEquals(
@@ -107,5 +107,19 @@ Deno.test("replace image #4", () => {
   assertEquals(
     imageFunction("@[image](./example.png)"),
     `<img src="./example.png" class="sld-left" width="500"/>`,
+  );
+});
+
+Deno.test("replace emoji #1", () => {
+  assertEquals(
+    emojiFunction({} as Record<string, Array<string>>)("@[:sob:]"),
+    `<img src="./1f62d.svg" class="sld-emoji-text"/>`,
+  );
+});
+
+Deno.test("replace emphasize #1", () => {
+  assertEquals(
+    emFunction("@[*HELLO WORLD*]"),
+    `<span class="sld-em">HELLO WORLD</span>`,
   );
 });
