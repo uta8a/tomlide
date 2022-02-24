@@ -46,6 +46,7 @@ Hello, this is link page for tomlide.
 This is simple usage @[link](https://github.com/uta8a/tomlide)
 link alias usage: @[link: Project repository](https://github.com/uta8a/tomlide)
 slide alias usage: @[link: slide 1](@1)
+"hello"
 """
 
 [[slide]]

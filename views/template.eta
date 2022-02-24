@@ -51,5 +51,26 @@ img.sld-emoji-text {
   </head>
 <body>
 <%~ includeFile('./body.eta', {slide: it.slide}) %>
+<script>
+  const router = (path) => {
+    console.log(path);
+    if (path === "") {
+      path = "#1";
+    }
+    const main = document.querySelector('#main');
+    const template = document.querySelector(`#template-${path.replace('#', '')}`);
+    if (template !== null) {
+      return template.innerHTML;
+    }else{
+      return `<h1>404</h1><p><a href='/'>Top page</a></p>`;
+    }
+  }
+  const render = path => {
+    document.querySelector("#main")
+      .innerHTML = router(path);
+  };
+  window.onhashchange = evt => render(window.location.hash);
+  render(window.location.hash);
+</script>
 </body>
 </html>

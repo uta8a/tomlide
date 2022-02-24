@@ -1,10 +1,11 @@
 <main>
+<div id="main"></div>
 <% it.slide.forEach((content, index) => { %>
-  <div>
+  <template id="template-<%= index %>">
     <h1><%= content.title %></h1>
     <p><%= content.text %></p>
     <span><%= `Page: ${index}` %></span>
-  </div>
+  </template>
   <% /* <% console.log(index, content) %> */ %>
 <% }) %>
 </main>
