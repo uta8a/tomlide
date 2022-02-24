@@ -26,7 +26,7 @@ Generate simple web slide from toml file
 alias by "GitHub" and "CLDR Short Name" are available
 
 # bold
-@[*bold text*] -> BOLD TEXT (font-weight: bold;)
+@[*BOLD TEXT*] -> BOLD TEXT (font-weight: bold;)
 ```
 
 ## development
