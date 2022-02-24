@@ -91,5 +91,5 @@ Hello, this is Bold page for tomlide.
 title = "Thank you!"
 text = """
 Do you have any questions?
-Feel free to open a @[link: issue](https://github.com/uta8a/tomlide/issues)
+Feel free to ask me. @[link: link to github/discussion](https://github.com/uta8a/tomlide/discussions/3)
 """
