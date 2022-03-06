@@ -11,14 +11,18 @@ const linkFunction = (s: string): string => {
     const link = gr.link.startsWith("@") ? `/#${gr.link.slice(1)}` : gr.link;
     if (name === "") {
       // @[link](URL)
-      return `<a href="${encodeURI(link)}" target="_blank" rel="noopener">${
-        encodeURI(link)
-      }</a>`;
+      return `<a href="${
+        encodeURI(
+          link,
+        )
+      }" target="_blank" rel="noopener">${encodeURI(link)}</a>`;
     } else if (linkNameRegExp.test(name)) {
       // @[link: title](URL)
       // slice(1) skip `:`
       return `<a href="${encodeURI(link)}" target="_blank" rel="noopener">${
-        name.slice(1).trim()
+        name
+          .slice(1)
+          .trim()
       }</a>`;
     } else {
       throw new Error("Valid Form: @[link](URL) or @[link: `title`](URL)");
@@ -44,9 +48,15 @@ const imageFunction = (s: string): string => {
     } else if (imageNameRegExp.test(image)) {
       // @[image: title](URL)
       // slice(1) skip `:`
-      return `<figure><img src="${encodeURI(link)}" class="sld-left" alt="${
-        image.slice(1).trim()
-      }"/><figcaption>${image.slice(1).trim()}</figcaption></figure>`;
+      return `<figure><img src="${
+        encodeURI(
+          link,
+        )
+      }" class="sld-left" alt="${image.slice(1).trim()}"/><figcaption>${
+        image
+          .slice(1)
+          .trim()
+      }</figcaption></figure>`;
     } else {
       throw new Error("Valid Form: @[image](URL) or @[image: `title`](URL)");
     }
@@ -58,8 +68,8 @@ const emojiRegExp = /@\[:(?<emoji>.*?):\]/;
 
 // use `assets/twemoji`, used emoji to `dist/`
 const convertEmoji = (s: string): string => {
-  const ghEmoji = emojiGHJsonData.find((emojiData) =>
-    emojiData.shortname === `:${s}:`
+  const ghEmoji = emojiGHJsonData.find(
+    (emojiData) => emojiData.shortname === `:${s}:`,
   );
   const emoji = emojiJsonData.find((emojiData) => emojiData.name === s);
   if (ghEmoji === undefined) {

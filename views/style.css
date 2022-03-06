@@ -42,7 +42,7 @@ main .page-number {
 }
 main img {
   max-height: 20rem;
-  max-width: 80rem;
+  max-width: 60rem;
   display: block;
   margin: auto;
 }
